@@ -12,7 +12,7 @@
 
 <div class="my-card mt-1">
 
-<div th:if="${session.message}" th:classappend=${session.message.type} class="alert " role="alert">
+<div th:if="${session.message}" th:classappend=" ${session.message.type}" class="alert " role="alert">
   <p class="text-center" th:text="${session.message.content}"></p>
   
   <th:block th:text="${#session.removeAttribute('message')}"></th:block>
@@ -32,7 +32,7 @@
     <label for="name_field">Your Name</label>
     <input name="name" type="text" class="form-control" th:classappend="${#fields.hasErrors('name')?'is-invalid':''}" id="name_field" aria-describedby="emailHelp" placeholder="Enter Name" required th:value="${user.name}"/>
     
-    <div class="invalid-feedback" th:each="e:${#fields.error('name')}" th:text="${e}">
+    <div class="invalid-feedback" th:each="e :${#fields.errors('name')}" th:text="${e}">
         
       </div>
 </div>
@@ -49,7 +49,7 @@
 </div>
 <!-- about field -->
 <div class="form-group">
-    <textarea name="about" th:value="${user.about}" placeholder="Enter somthing about yourself" rows="6" class="form-control"></textarea>
+    <textarea name="about" th:text="${user.about}" placeholder="Enter somthing about yourself" rows="6" class="form-control"></textarea>
 </div>
 <!-- terms and condition -->
 

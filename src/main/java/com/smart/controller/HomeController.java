@@ -1,6 +1,7 @@
 package com.smart.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.hibernate.hql.internal.NameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class HomeController {
 	
 	//handler for registering user
 	@RequestMapping(value = "/do_register",method = RequestMethod.POST)
-	public String registerUser(@ModelAttribute("user") User user,BindingResult result1,@RequestParam(value = "agreement",defaultValue = "false")boolean agreement,Model model,HttpSession session) {
+	public String registerUser(@Valid @ModelAttribute("user") User user,BindingResult result1, @RequestParam(value = "agreement",defaultValue = "false")boolean agreement,Model model,HttpSession session) {
 		
 		try {
 			if(!agreement) {
