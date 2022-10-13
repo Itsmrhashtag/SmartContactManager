@@ -26,7 +26,7 @@ public class User {
 	@Size(min = 2,max = 20,message  = "Min 2 and Max 20 char are allowed!!")
 	private String name;
 	@Column(unique = true)
-	@NotBlank(message = "Email Required!!")
+	@NotBlank(message = "Enter Email !!")
 	private String email;
 	@Override
 	public String toString() {

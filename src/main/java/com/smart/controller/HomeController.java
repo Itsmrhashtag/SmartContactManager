@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.hibernate.hql.internal.NameGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,9 @@ import com.smart.helper.Message;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserRepo userRepo;
@@ -52,7 +56,7 @@ public class HomeController {
 		try {
 			if(!agreement) {
 				System.out.println("not check");
-				throw new Exception("Not Check");
+				throw new Exception("not Check");
 				}
 			
 			if(result1.hasErrors()) {
@@ -64,6 +68,8 @@ public class HomeController {
 			user.setRole("ROLE_USER");
 			user.setEnabled(true);
 			user.setImageUrl("default.png");
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+			
 			System.out.println("Agreement"+agreement);
 			System.out.println("User"+user);
 			
@@ -80,5 +86,13 @@ public class HomeController {
 			return "signup";
 		}
 		
+		
+	}
+	
+	//handler for custom login
+	@GetMapping("/signin")
+	public String customLogin(Model model) {
+		model.addAttribute("title","Login Page");
+		return "login";
 	}
 }
