@@ -48,10 +48,11 @@ public class MyConfig extends WebSecurityConfigurerAdapter{
 	                .antMatchers("/user/**").hasRole("USER")
 	                .antMatchers("/**").permitAll()
 	                .and()
-	                .formLogin().loginPage("/signin")
-	                .loginProcessingUrl("/dologin")
+	                .formLogin()
+	                .loginPage("/signin")
+	                .loginProcessingUrl("/signin")
 	                .defaultSuccessUrl("/user/index")
-	                .failureUrl("/loginerror")
+//	                .failureUrl("/loginfail")
 	                .and()
 	                .csrf().disable();
 	    }

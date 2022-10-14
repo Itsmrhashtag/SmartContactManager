@@ -33,20 +33,20 @@ public class HomeController {
 	
 	@RequestMapping("/")
 	public String home(Model model) {
-		model.addAttribute("title","home-Smart COntact");
+		model.addAttribute("title","home-Smart Contact");
 		return "home";
 	}
 	
 	@RequestMapping("/about")
 	public String about(Model model) {
-		model.addAttribute("title","About-Smart COntact");
-		return "About";
+		model.addAttribute("title","About-Smart Contact");
+		return "about";
 	}
 	@RequestMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("title","Register-Smart Contact Manager");
 		model.addAttribute("user",new User());
-		return "Signup";
+		return "signup";
 	}
 	
 	//handler for registering user
@@ -65,7 +65,7 @@ public class HomeController {
 				return "signup";
 			}
 			
-			user.setRole("ROLE_USER");
+			user.setRole("USER");
 			user.setEnabled(true);
 			user.setImageUrl("default.png");
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -93,6 +93,6 @@ public class HomeController {
 	@GetMapping("/signin")
 	public String customLogin(Model model) {
 		model.addAttribute("title","Login Page");
-		return "login";
+		return "Login";
 	}
 }

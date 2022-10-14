@@ -25,16 +25,14 @@
       <li class="nav-item active">
         <a th:href="@{/}" class="nav-link">Home <span class="sr-only">(current)</span></a>
       </li>
+     
       <li class="nav-item">
-        <a th:href="@{/about}" class="nav-link">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/signin}" tabindex="-1" aria-expanded="true">
-          Login
+        <a class="nav-link"  tabindex="-1" aria-expanded="true"><span th:text="${user.name}"></span>
+          
         </a></li>
       <li class="nav-item">
-        <a th:href="@{/signup}" class="nav-link" tabindex="-1" aria-expanded="true">
-          Sign Up
+        <a th:href="@{/logout}" class="nav-link" tabindex="-1" aria-expanded="true">
+          Logout
         </a></li>
     </ul>
   </div>
