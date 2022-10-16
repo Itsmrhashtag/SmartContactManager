@@ -45,6 +45,7 @@ body{
 	}
 	.content{
 	margin-left:0% !important;
+	
 	}
 }
 
@@ -54,6 +55,7 @@ body{
 	height:100%;
 	position:fixed;
 	padding-top:45px;
+	z-index:999999999999999999999999999999999999;
 }
 
 .sidebar a{

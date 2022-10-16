@@ -82,4 +82,6 @@ public class Contact {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
 }
