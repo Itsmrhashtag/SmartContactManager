@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -69,7 +69,7 @@ public class UserController {
 		model.addAttribute("contact", new Contact());
 		return "normal/add_contact_form";
 	}
-	
+	 
 	//processing add contact form
 	@PostMapping("/process-contact")
 	public String processContact(
@@ -83,7 +83,7 @@ public class UserController {
 		
 		//processing and uploading file
 		if(file.isEmpty()) {
-			
+			contact.setImage("contact.png");
 		}
 		else {
 			contact.setImage(file.getOriginalFilename());
@@ -140,5 +140,18 @@ public class UserController {
 		return "normal/show_contacts";
 	}
 	
+//	showing perticular conbtact detail
+	@RequestMapping("/{cId}/contact")
+	public String showContactDetail(@PathVariable("cId") Integer cId, Model model) {
+		
+		System.out.println("CiD "+cId);
+		
+		Optional<Contact> contactOptional = this.contactRepo.findById(cId);
+		Contact contact = contactOptional.get();
+		
+		model.addAttribute("contact", contact);
+		
+		return "normal/contact_detail";
+	}
 	
 }
