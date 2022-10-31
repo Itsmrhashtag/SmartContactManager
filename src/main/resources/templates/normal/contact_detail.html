@@ -7,7 +7,7 @@
 <section>
 <div class="card mr-3 ml-3">
 
-<div class="card-body">
+<div class="card-body" th:if=${contact}>
 
 <div class="container text-center">
 
@@ -41,14 +41,22 @@
  
   
 </table>
-       <div class="description">
+       <div class="description mt-3">
   
-  <th:block th:text="${contact.description}"></th:block>
+  <th:block th:utext="${contact.description}"></th:block>
   
   </div>
+  
+  <div class="container mt-3">
+   <button href="#" th:onclick="|deleteContact(${contact.cId})|" class="btn btn-danger btn-sm btn-block">Delete</button>
+      <button class="btn btn-primary btn-sm btn-block">Update</button>  
+  </div>
+  
 </div>
 
 </div>
+
+<h1 th:unless="${contact}">You Don't Have Permission</h1>
 
 </div>
 

@@ -58,6 +58,7 @@ public class UserController {
 	public String dashboard(Model model, Principal principal) {
 		model.addAttribute("title", "Dashboard");
 		//get the user using (email)
+		System.out.println("Normat ka dashboard");
 		return "normal/user_dashboard";
 	}
 	
@@ -142,16 +143,39 @@ public class UserController {
 	
 //	showing perticular conbtact detail
 	@RequestMapping("/{cId}/contact")
-	public String showContactDetail(@PathVariable("cId") Integer cId, Model model) {
+	public String showContactDetail(@PathVariable("cId") Integer cId, Model model,Principal principal) {
 		
 		System.out.println("CiD "+cId);
 		
 		Optional<Contact> contactOptional = this.contactRepo.findById(cId);
 		Contact contact = contactOptional.get();
 		
-		model.addAttribute("contact", contact);
+		String userName = principal.getName();
+		User user = this.userRepo.getUserByUserName(userName);
+		
+		if(user.getId()==contact.getUser().getId()) {
+			model.addAttribute("contact", contact);
+		}
 		
 		return "normal/contact_detail";
 	}
 	
+//	delete contact handeler
+	@GetMapping("/delete/{cId}")
+	public String deleteContact(@PathVariable("cId") Integer cId, Model model,HttpSession session) {
+		
+		Contact contact = this.contactRepo.findById(cId).get();
+		
+		contact.setUser(null);
+		
+		this.contactRepo.delete(contact);
+		
+		session.setAttribute("message", new Message("Contact Deleted Successfully","success"));
+		return "redirect:/user/show-contacts/0";
+	}
+	
+	
+	//update form handler
+	
+	public S
 }
